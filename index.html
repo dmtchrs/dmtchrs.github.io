@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Christian Demetillo</title>
+<meta name="description" content="Portfolio of Christian Demetillo — Computer Science student at USJ-R, Cebu. Computer vision, machine learning and applied research.">
+<link rel="icon" href="assets/eye.png">
+<style>
+@font-face{font-family:"Zing Rust";src:url("fonts/zing-rust.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Zing Rust Shine";src:url("fonts/zing-rust-shine.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Zing Sans";src:url("fonts/zing-sans.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Zing Script";src:url("fonts/zing-script.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Above Script";src:url("fonts/above-script.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Above Serif";src:url("fonts/above-serif.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Above Serif";font-style:italic;src:url("fonts/above-serif-italic.woff2") format("woff2");font-display:swap}
+
+:root{
+  --bg:#e5ddd8; --bg-2:#ddd3cd; --ink:#111; --ink-2:#3b3533; --muted:#6d6461;
+  --red:#cf3131; --paper:#f6f3f1; --shine:#fff; --dot:#5f5f5f; --line:rgba(17,17,17,.14);
+  --card:#efe9e5;
+}
+:root[data-theme="dark"]{
+  --bg:#262626; --bg-2:#1f1f1f; --ink:#f4f0ee; --ink-2:#d9d2cf; --muted:#a29a97;
+  --red:#d93a3a; --paper:#f1eeec; --shine:#262626; --dot:#4a4a4a; --line:rgba(255,255,255,.14);
+  --card:#2e2e2e;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#262626; --bg-2:#1f1f1f; --ink:#f4f0ee; --ink-2:#d9d2cf; --muted:#a29a97;
+    --red:#d93a3a; --paper:#f1eeec; --shine:#262626; --dot:#4a4a4a; --line:rgba(255,255,255,.14);
+    --card:#2e2e2e;
+  }
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Above Serif",Georgia,serif;font-size:19px;line-height:1.6;overflow-x:hidden;transition:background .4s,color .4s;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+::selection{background:var(--red);color:#fff}
+
+/* ---------- nav ---------- */
+nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px clamp(16px,4vw,48px);transition:background .3s,backdrop-filter .3s}
+nav.scrolled{background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.brand{font-family:"Above Script";font-size:30px;text-decoration:none;line-height:1}
+.nav-links{display:flex;gap:clamp(14px,2.4vw,32px);align-items:center;list-style:none}
+.nav-links a{font-family:"Zing Rust";font-size:19px;letter-spacing:.06em;text-decoration:none;position:relative}
+.nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:-2px;height:2px;background:var(--red);transition:right .25s}
+.nav-links a:hover::after{right:0}
+.theme-btn{border:1.5px solid var(--ink);background:none;color:var(--ink);width:38px;height:38px;border-radius:50%;cursor:pointer;display:grid;place-items:center;transition:transform .3s}
+.theme-btn:hover{transform:rotate(25deg)}
+.theme-btn svg{width:18px;height:18px}
+@media (max-width:640px){.nav-links li:not(:last-child){display:none}}
+
+/* ---------- paint dots ---------- */
+.dots{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.dots span{position:absolute;background:var(--dot);border-radius:52% 48% 55% 45%/50% 58% 42% 50%}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100svh;padding:110px clamp(16px,4vw,64px) 40px;display:grid;grid-template-rows:1fr auto;overflow:hidden}
+.hero-stage{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:center;gap:clamp(20px,3vw,60px);max-width:1500px;width:100%;margin:0 auto}
+.photo-wrap{position:relative;justify-self:center;width:min(100%,520px);aspect-ratio:1/1.05}
+.stamp{position:absolute;width:86%;left:-14%;top:0;opacity:.95}
+.polaroid{position:absolute;left:8%;top:6%;width:78%;filter:drop-shadow(0 18px 24px rgba(0,0,0,.25));transform:rotate(-2deg);}
+.polaroid img{width:100%}
+.polaroid{container-type:inline-size}
+.polaroid .caption{position:absolute;left:20%;right:13%;bottom:10%;height:11%;font-family:"Above Script";color:#111;font-size:5cqw;line-height:1;transform:rotate(-6deg);transform-origin:50% 50%;pointer-events:none}
+.polaroid .caption span{position:absolute;white-space:nowrap}
+.polaroid .caption span:first-child{left:0;top:0}
+.polaroid .caption span:last-child{right:0;bottom:0}
+.tape{position:absolute;left:-2%;top:-1%;width:32%;height:13%;background:linear-gradient(180deg,rgba(244,231,190,.92),rgba(232,216,168,.92));transform:rotate(38deg);box-shadow:0 2px 6px rgba(0,0,0,.12);clip-path:polygon(3% 0,97% 4%,100% 50%,96% 100%,2% 96%,0 50%);z-index:3}
+.heart{position:absolute;width:22%;right:-8%;bottom:-6%;z-index:4;transform:rotate(-4deg)}
+
+.hero-text{position:relative}
+.title-row{position:relative;display:flex;align-items:center}
+.eye{position:absolute;width:clamp(90px,13vw,210px);left:clamp(-90px,-6vw,-40px);top:50%;transform:translateY(-55%) rotate(-8deg);z-index:0}
+.big-title{position:relative;z-index:1;font-family:"Zing Rust";font-size:clamp(64px,12.5vw,230px);line-height:.95;letter-spacing:.01em;color:var(--ink)}
+.big-title::after{content:attr(data-text);position:absolute;inset:0;font-family:"Zing Rust Shine";color:var(--shine);pointer-events:none}
+.greet{position:relative;margin-top:clamp(4px,2vw,30px);padding-left:clamp(0px,4vw,70px)}
+.greet .hi{font-family:"Above Script";font-size:clamp(64px,9vw,150px);line-height:1;display:block}
+.greet .name{position:relative;display:inline-block;font-family:"Above Script";font-size:clamp(30px,3.5vw,62px);line-height:1.2;margin-left:clamp(20px,5vw,90px);white-space:nowrap;isolation:isolate}
+.greet .name .sig{position:absolute;width:62%;left:22%;top:-1.75em;z-index:1;pointer-events:none;filter:drop-shadow(3px 6px 4px rgba(0,0,0,.28))}
+.sig path{fill:none}
+.tagline{margin-top:clamp(44px,5.5vw,76px);margin-left:clamp(20px,5vw,90px);max-width:520px;color:var(--ink-2);font-size:clamp(16px,1.35vw,20px)}
+.tagline b{font-family:"Zing Rust";font-weight:400;letter-spacing:.04em;color:var(--red);font-size:1.1em}
+
+.contact-bar{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;max-width:1500px;width:100%;margin:clamp(30px,4vw,50px) auto 0;font-family:system-ui,"Segoe UI",Arial,sans-serif;font-size:clamp(15px,1.5vw,24px)}
+.contact-bar a{text-decoration:none;transition:color .2s}
+.contact-bar a:hover{color:var(--red)}
+.contact-bar img{width:clamp(22px,2.2vw,38px)}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.hero .reveal{transition-delay:var(--d,0s)}
+
+/* ---------- sections ---------- */
+section{position:relative;padding:clamp(70px,10vw,140px) clamp(16px,4vw,64px)}
+.wrap{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.script-head{font-family:"Above Script";font-weight:400;font-size:clamp(68px,10vw,150px);line-height:1.05;text-align:center;margin-bottom:clamp(20px,4vw,50px)}
+.label{font-family:"Zing Rust";font-size:clamp(20px,2vw,26px);letter-spacing:.03em;text-transform:uppercase;line-height:1.1}
+.divider{display:flex;align-items:center;gap:14px;justify-content:center;margin:0 auto;opacity:.9}
+.divider::before,.divider::after{content:"";height:1.5px;width:min(28vw,280px);background:var(--line)}
+.divider img{width:26px}
+
+/* about */
+.about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(30px,5vw,80px);align-items:start}
+.about-lead{font-family:"Above Serif";font-style:italic;font-size:clamp(24px,2.6vw,36px);line-height:1.3}
+.about-lead em{color:var(--red);font-style:italic}
+.about-body{margin-top:22px;color:var(--ink-2);max-width:60ch}
+.about-body p+p{margin-top:14px}
+.facts{display:grid;gap:22px}
+.fact{border-top:1.5px solid var(--ink);padding-top:12px}
+.fact .label{margin-bottom:4px}
+.fact p{color:var(--ink-2);font-size:17px}
+.fact .yr{font-family:"Zing Rust";color:var(--red);letter-spacing:.04em;margin-right:8px}
+.awards{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.award{font-family:"Zing Sans";letter-spacing:.03em;display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--ink);border-radius:999px;padding:4px 14px 4px 8px;font-size:15px}
+.award img{width:18px}
+
+/* projects */
+#projects{background:var(--bg-2)}
+.feature{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(24px,4vw,60px);align-items:center;margin-bottom:clamp(50px,7vw,90px)}
+.feature .label{font-size:clamp(26px,3vw,40px)}
+.kicker{display:inline-block;font-family:"Zing Script";font-size:15px;color:#fff;background:var(--red);padding:2px 12px;transform:rotate(-2deg);margin-bottom:14px}
+.feature p{color:var(--ink-2);margin-top:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chips span{font-family:"Zing Sans";letter-spacing:.04em;font-size:13px;border:1.2px solid var(--line);background:var(--card);padding:3px 11px;border-radius:4px}
+.flow{position:relative;background:var(--paper);color:#111;padding:26px 22px 22px;transform:rotate(1.2deg);box-shadow:0 20px 40px rgba(0,0,0,.18)}
+.flow::before{content:"";position:absolute;top:-14px;left:50%;width:110px;height:30px;transform:translateX(-50%) rotate(-3deg);background:rgba(240,226,180,.9);box-shadow:0 2px 5px rgba(0,0,0,.1)}
+.flow h4{font-family:"Zing Rust";font-weight:400;font-size:22px;letter-spacing:.03em;margin-bottom:12px}
+.gate{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px dashed rgba(0,0,0,.2)}
+.gate b{font-family:"Zing Rust";font-weight:400;font-size:28px;color:#cf3131;line-height:1;min-width:26px}
+.gate span{font-size:16px;line-height:1.4}
+.gate small{display:block;color:#6d6461;font-size:14px}
+
+.proj-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,26px)}
+.proj{position:relative;background:var(--card);border:1.5px solid var(--line);padding:24px 22px 22px;transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .35s}
+.proj:nth-child(3n+1){transform:rotate(-.6deg)}
+.proj:nth-child(3n+2){transform:rotate(.5deg)}
+.proj:nth-child(3n){transform:rotate(-.3deg)}
+.proj:hover{transform:rotate(0) translateY(-6px);border-color:var(--red);box-shadow:0 18px 30px rgba(0,0,0,.12)}
+.proj-wide{grid-column:1/-1;transform:rotate(-.3deg)!important}
+.proj-wide{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(20px,4vw,56px);align-items:center}
+.wide-steps{list-style:none;padding-right:40px}
+.wide-steps li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px dashed var(--line)}
+.wide-steps li:first-child{border-top:0}
+.wide-steps b{font-family:"Zing Rust";font-weight:400;font-size:28px;color:var(--red);line-height:1;min-width:22px}
+.wide-steps span{font-size:17px;line-height:1.35}
+.wide-steps small{display:block;color:var(--muted);font-size:14px}
+.proj-wide .kicker{margin-bottom:10px}
+.proj-wide:hover{transform:translateY(-6px)!important}
+.proj .num{position:absolute;top:12px;right:16px;font-family:"Zing Rust";font-size:44px;line-height:1;color:var(--red);opacity:.22}
+.proj .label{font-size:22px;padding-right:44px}
+.proj p{margin-top:10px;color:var(--ink-2);font-size:16px;line-height:1.5}
+.proj .chips span{font-size:13px;padding:2px 9px}
+.more{text-align:center;margin-top:clamp(36px,5vw,60px)}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:"Zing Rust";font-size:22px;letter-spacing:.05em;text-decoration:none;border:2px solid var(--ink);padding:10px 26px;transition:background .25s,color .25s,transform .25s}
+.btn:hover{background:var(--ink);color:var(--bg);transform:translateY(-2px)}
+.btn.red{background:var(--red);border-color:var(--red);color:#fff}
+.btn.red:hover{background:transparent;color:var(--red)}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,40px)}
+.skill-col .label{display:flex;align-items:center;gap:8px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:12px}
+.skill-col .label img{width:18px}
+.skill-col ul{list-style:none}
+.skill-col li{padding:6px 0;border-bottom:1px solid var(--line);font-size:18px;transition:padding .2s,color .2s}
+.skill-col li:hover{padding-left:8px;color:var(--red)}
+
+/* contact */
+#contact{text-align:center;overflow:hidden}
+.contact-big{font-family:"Zing Rust";font-size:clamp(54px,10vw,170px);line-height:.95;position:relative;display:inline-block}
+.contact-big::after{content:attr(data-text);position:absolute;inset:0;font-family:"Zing Rust Shine";color:var(--shine)}
+.contact-sub{font-family:"Above Serif";font-style:italic;font-size:clamp(20px,2.2vw,28px);color:var(--ink-2);margin:16px auto 34px;max-width:620px}
+.contact-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:14px}
+.contact-stamp{position:absolute;width:clamp(180px,24vw,340px);right:-4%;top:6%;opacity:.18;transform:rotate(18deg)}
+.contact-sig{width:clamp(180px,20vw,280px);margin:44px auto 0}
+
+footer{font-family:"Zing Sans";letter-spacing:.05em;text-align:center;padding:30px 16px 40px;color:var(--muted);font-size:15px;border-top:1px solid var(--line)}
+footer .brand{display:block;font-size:34px;color:var(--ink);margin-bottom:6px}
+
+/* ---------- responsive ---------- */
+@media (max-width:1000px){
+  .proj-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .skills{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:820px){
+  .hero{padding-top:90px}
+  .hero-stage{grid-template-columns:1fr;gap:10px}
+  .photo-wrap{width:min(78vw,400px);order:2;margin-top:10px}
+  .hero-text{order:1;text-align:left}
+  .eye{left:-14px;width:90px}
+  .title-row{padding-left:40px}
+  .greet{padding-left:0}
+  .greet{margin-top:34px}
+  .greet .hi{font-size:clamp(56px,16vw,90px)}
+  .greet .name{margin-left:4px;font-size:clamp(24px,7.2vw,48px)}
+  .tagline{margin-left:8px}
+  .contact-bar{justify-content:center;flex-direction:column;gap:6px}
+  .contact-bar img{display:none}
+  .about-grid,.feature,.proj-wide{grid-template-columns:1fr}
+  .wide-steps{padding-right:0}
+}
+@media (max-width:560px){
+  body{font-size:17px}
+  .proj-grid,.skills{grid-template-columns:1fr}
+  .proj{transform:none!important}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="brand" href="#top">Christian</a>
+  <ul class="nav-links">
+    <li><a href="#about">ABOUT</a></li>
+    <li><a href="#projects">PROJECTS</a></li>
+    <li><a href="#skills">SKILLS</a></li>
+    <li><a href="#contact">CONTACT</a></li>
+    <li><button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button></li>
+  </ul>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <div class="dots" data-dots="hero"></div>
+  <div class="hero-stage">
+    <div class="photo-wrap">
+      <img class="stamp" src="assets/stamp.png" alt="">
+      <div class="polaroid">
+        <div class="tape"></div>
+        <img src="assets/polaroid.png" alt="Polaroid photo of Christian Demetillo">
+        <div class="caption"><span>CHRISTIAN</span><span>DEMETILLO</span></div>
+      </div>
+      <img class="heart" src="assets/heart.png" alt="">
+    </div>
+
+    <div class="hero-text">
+      <div class="title-row reveal" style="--d:.25s">
+        <img class="eye" src="assets/eye.png" alt="">
+        <h1 class="big-title" data-text="PORTFOLIO">PORTFOLIO</h1>
+      </div>
+      <div class="greet reveal" style="--d:.45s">
+        <span class="hi">Hi</span>
+        <span class="name">Im Christian Demetillo
+          <img class="sig" src="assets/signature.png" alt="">
+        </span>
+      </div>
+      <p class="tagline reveal" style="--d:.6s">Computer Science student at USJ-R, Cebu — building <b>computer vision</b> and <b>machine learning</b> systems for real Philippine problems.</p>
+    </div>
+  </div>
+
+  <div class="contact-bar reveal" style="--d:.75s">
+    <a href="mailto:christian.demetillo.23@usjr.edu.ph">christian.demetillo.23@usjr.edu.ph</a>
+    <img src="assets/star.png" alt="">
+    <a href="tel:+639617095667">+63 9617 095 667</a>
+    <img src="assets/star.png" alt="">
+    <a href="https://github.com/dmtchrs" target="_blank" rel="noopener">https://github.com/dmtchrs</a>
+  </div>
+</header>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="dots" data-dots="about"></div>
+  <div class="wrap">
+    <h2 class="script-head reveal">About Me</h2>
+    <div class="about-grid">
+      <div class="reveal">
+        <p class="about-lead">I teach cameras to <em>notice things</em> — where someone is looking, what a hand is drawing, when a flood is coming.</p>
+        <div class="about-body">
+          <p>I'm a Computer Science student at the University of San Jose-Recoletos in Cebu. Most of my work sits where computer vision, machine learning and applied research meet, and I like aiming it at problems that actually show up here in the Philippines — exam integrity in low-resource schools, flood alerts in local languages, deforestation around Cebu.</p>
+          <p>I work mostly in Python on Windows with VS Code, Jupyter and Google Colab, and I build things step by step until they hold up in front of a panel.</p>
+        </div>
+      </div>
+      <div class="facts reveal">
+        <div class="fact">
+          <div class="label">Education</div>
+          <p><span class="yr">2023 – 2026</span>BS Computer Science — University of San Jose-Recoletos</p>
+          <p><span class="yr">2020 – 2022</span>Senior High — Cebu Institute of Technology</p>
+          <p><span class="yr">Until 2020</span>Mary Help of Christians School (Cebu) Inc.</p>
+        </div>
+        <div class="fact">
+          <div class="label">Recognition</div>
+          <div class="awards">
+            <span class="award"><img src="assets/star.png" alt="">2nd Runner-up · USJ-R Jaguars Lair</span>
+            <span class="award"><img src="assets/star.png" alt="">Top 25 · Ceb-I Hackathon 2026</span>
+            <span class="award"><img src="assets/star.png" alt="">Blockchain Technology Workshop</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects">
+  <div class="wrap">
+    <h2 class="script-head reveal">My Projects</h2>
+
+    <div class="feature">
+      <div class="reveal">
+        <span class="kicker">thesis</span>
+        <h3 class="label">AEye – AI-Based Exam Proctoring System</h3>
+        <p><i>Multimodal Analysis of Visual Behavior for Cheating Detection in Computer-Based Exams.</i> A dual-camera desktop app that watches gaze, head pose and posture during exams — designed for Philippine schools that can't afford commercial proctoring.</p>
+        <p>Each student calibrates with a short reading task, which trains their own Isolation Forest model, so the system learns what is normal <i>for them</i> instead of flagging everyone against one template. Student mode locks the screen to a kiosk browser on the LMS; proctor mode shows live alerts.</p>
+        <div class="chips"><span>Python</span><span>MediaPipe</span><span>YOLOv8</span><span>Isolation Forest</span><span>solvePnP head pose</span><span>MySQL</span></div>
+      </div>
+      <div class="flow reveal">
+        <h4>THREE-GATE FLAGGING RULE</h4>
+        <div class="gate"><b>1</b><span>Model says the frame is anomalous<small>per-student Isolation Forest</small></span></div>
+        <div class="gate"><b>2</b><span>Eyes are off the screen<small>iris ratio + head pose</small></span></div>
+        <div class="gate"><b>3</b><span>It lasts at least 2 seconds<small>one incident per episode</small></span></div>
+      </div>
+    </div>
+
+    <div class="proj-grid">
+      <article class="proj proj-wide reveal">
+        <span class="num">02</span>
+        <div class="wide-main">
+          <span class="kicker">2nd runner-up · USJ-R SCS Hackathon</span>
+          <h3 class="label">STF (Save The Fuel)</h3>
+          <p>An offline mobile app built with a team for Cebu jeepney drivers. It notices when a jeepney is stuck idling in traffic and reminds the driver to turn the engine off, so less fuel and money goes to waste.</p>
+          <div class="chips"><span>Flutter</span><span>Dart</span><span>SQLite</span><span>GPS</span><span>Motion sensors</span></div>
+        </div>
+        <ol class="wide-steps">
+          <li><b>1</b><span>Detects idling<small>GPS + motion sensors, fully offline</small></span></li>
+          <li><b>2</b><span>Cebuano voice cue<small>tells the driver to cut the engine</small></span></li>
+          <li><b>3</b><span>Peso savings + fuel prices<small>tracks money saved, shows a price board</small></span></li>
+        </ol>
+      </article>
+      <article class="proj reveal">
+        <span class="num">03</span>
+        <h3 class="label">FloodGuard ASEAN</h3>
+        <p>NLP research on a multilingual flood alert system for Cebu, so warnings reach people in the language they actually read.</p>
+        <div class="chips"><span>NLP</span><span>Multilingual</span><span>Research</span></div>
+      </article>
+      <article class="proj reveal">
+        <span class="num">04</span>
+        <h3 class="label">Demetillo MVC Framework</h3>
+        <p>A PHP MVC framework written from scratch — routing, an ORM and a DI container — with a Contact Book app built on top.</p>
+        <div class="chips"><span>PHP</span><span>MVC</span><span>ORM</span></div>
+      </article>
+      <article class="proj reveal">
+        <span class="num">05</span>
+        <h3 class="label">Virtual Painter</h3>
+        <p>Draw in the air with your finger; the app recognizes the letters you write using a trained MLP classifier.</p>
+        <div class="chips"><span>MediaPipe</span><span>OpenCV</span><span>MLPClassifier</span></div>
+      </article>
+      <article class="proj reveal">
+        <span class="num">06</span>
+        <h3 class="label">AR Hand-Tracking Canvas</h3>
+        <p>An augmented-reality drawing app that only unlocks after face recognition confirms who is at the camera.</p>
+        <div class="chips"><span>Hand tracking</span><span>Face recognition</span><span>AR</span></div>
+      </article>
+      <article class="proj reveal">
+        <span class="num">07</span>
+        <h3 class="label">Cebu Satellite Watch</h3>
+        <p>Time-series research on deforestation and flood risk across Cebu using Landsat imagery in Google Earth Engine.</p>
+        <div class="chips"><span>Landsat</span><span>Earth Engine</span><span>Remote sensing</span></div>
+      </article>
+      <article class="proj reveal">
+        <span class="num">08</span>
+        <h3 class="label">Traffic Detector</h3>
+        <p>Detects riders without helmets and reads license plates from traffic footage.</p>
+        <div class="chips"><span>Object detection</span><span>Computer vision</span></div>
+      </article>
+      <article class="proj reveal">
+        <span class="num">09</span>
+        <h3 class="label">MQTT Plant Watering</h3>
+        <p>An automatic plant watering system that reports soil readings and triggers the pump over MQTT.</p>
+        <div class="chips"><span>IoT</span><span>MQTT</span></div>
+      </article>
+      <article class="proj reveal">
+        <span class="num">10</span>
+        <h3 class="label">Obstacle-Avoiding Car</h3>
+        <p>An Arduino robot car that senses obstacles ahead and steers around them on its own.</p>
+        <div class="chips"><span>Arduino</span><span>Sensors</span><span>Robotics</span></div>
+      </article>
+      <article class="proj reveal">
+        <span class="num">11</span>
+        <h3 class="label">Data Mining Lab</h3>
+        <p>Speech emotion recognition, market basket analysis, K-means clustering and more — the full ML pipeline, notebook by notebook.</p>
+        <div class="chips"><span>scikit-learn</span><span>Apriori</span><span>K-means</span></div>
+      </article>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills">
+  <div class="dots" data-dots="skills"></div>
+  <div class="wrap">
+    <h2 class="script-head reveal">Toolkit</h2>
+    <div class="skills">
+      <div class="skill-col reveal">
+        <div class="label"><img src="assets/star.png" alt="">Vision</div>
+        <ul><li>OpenCV</li><li>MediaPipe</li><li>YOLOv8</li><li>Head pose (solvePnP)</li><li>Gaze estimation</li></ul>
+      </div>
+      <div class="skill-col reveal">
+        <div class="label"><img src="assets/star.png" alt="">Languages &amp; Web</div>
+        <ul><li>Python</li><li>PHP</li><li>JavaScript</li><li>MySQL</li></ul>
+      </div>
+      <div class="skill-col reveal">
+        <div class="label"><img src="assets/star.png" alt="">Hardware &amp; Data</div>
+        <ul><li>Arduino</li><li>ESP32</li><li>MQTT</li><li>Google Earth Engine</li><li>Jupyter · Colab</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <img class="contact-stamp" src="assets/stamp.png" alt="">
+  <div class="wrap">
+    <div class="divider reveal"><img src="assets/star.png" alt=""></div>
+    <h2 class="contact-big reveal" data-text="LET'S TALK" style="margin-top:36px">LET'S TALK</h2>
+    <p class="contact-sub reveal">Open to OJT and internship opportunities, collaborations, and anything that needs a camera to understand what it's seeing.</p>
+    <div class="contact-actions reveal">
+      <a class="btn red" href="mailto:christian.demetillo.23@usjr.edu.ph">EMAIL ME</a>
+      <a class="btn" href="tel:+639617095667">+63 9617 095 667</a>
+      <a class="btn" href="https://github.com/dmtchrs" target="_blank" rel="noopener">GITHUB</a>
+    </div>
+    <img class="contact-sig" src="assets/signature.png" alt="Signature">
+  </div>
+</section>
+
+<footer>
+  <span class="brand">Christian Demetillo</span>
+  Cebu, Philippines · © <span id="yr">2026</span>
+</footer>
+
+<script>
+// theme toggle (remembered per browser)
+(function(){
+  const root=document.documentElement, btn=document.getElementById('themeBtn');
+  let saved=null; try{saved=localStorage.getItem('cd-theme')}catch(e){}
+  if(saved) root.dataset.theme=saved;
+  btn.addEventListener('click',()=>{
+    const dark = root.dataset.theme ? root.dataset.theme==='dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    root.dataset.theme = dark ? 'light' : 'dark';
+    try{localStorage.setItem('cd-theme',root.dataset.theme)}catch(e){}
+  });
+})();
+
+// scattered paint dots (seeded so they stay put)
+document.querySelectorAll('[data-dots]').forEach((el,k)=>{
+  let s=(k+3)*9973; const r=()=>((s=(s*16807)%2147483647)/2147483647);
+  const n = el.dataset.dots==='hero' ? 26 : 12;
+  for(let i=0;i<n;i++){
+    const d=document.createElement('span'), z=r()<.15? 10+r()*16 : 3+r()*8;
+    d.style.cssText=`left:${r()*100}%;top:${r()*100}%;width:${z}px;height:${z*(.8+r()*.4)}px;transform:rotate(${r()*180}deg);opacity:${.55+r()*.45}`;
+    el.appendChild(d);
+  }
+});
+
+// reveal on scroll
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// nav background on scroll
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
