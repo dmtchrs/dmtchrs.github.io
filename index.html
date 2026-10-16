@@ -121,7 +121,7 @@ section{position:relative;padding:clamp(70px,10vw,140px) clamp(16px,4vw,64px)}
 
 /* projects */
 #projects{background:var(--bg-2)}
-.feature{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(24px,4vw,60px);align-items:center;margin-bottom:clamp(50px,7vw,90px)}
+.feature{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(24px,4vw,60px);align-items:center;margin-bottom:clamp(40px,5vw,60px)}
 .feature .label{font-size:clamp(26px,3vw,40px)}
 .kicker{display:inline-block;font-family:"Zing Script";font-size:15px;color:#fff;background:var(--red);padding:2px 12px;transform:rotate(-2deg);margin-bottom:14px}
 .feature p{color:var(--ink-2);margin-top:14px}
@@ -135,6 +135,11 @@ section{position:relative;padding:clamp(70px,10vw,140px) clamp(16px,4vw,64px)}
 .gate span{font-size:16px;line-height:1.4}
 .gate small{display:block;color:#6d6461;font-size:14px}
 
+.shot{margin:0 0 clamp(50px,7vw,90px)}
+.shot-frame{position:relative;background:var(--paper);padding:12px;box-shadow:0 22px 44px rgba(0,0,0,.18);transform:rotate(-.6deg)}
+.shot-frame::before{content:"";position:absolute;top:-14px;left:8%;width:120px;height:30px;transform:rotate(-6deg);background:rgba(240,226,180,.9);box-shadow:0 2px 5px rgba(0,0,0,.1)}
+.shot-frame img{width:100%;height:auto;border:1px solid rgba(0,0,0,.08)}
+.shot figcaption{margin-top:16px;text-align:center;font-family:"Above Serif";font-style:italic;color:var(--ink-2);font-size:clamp(16px,1.5vw,19px)}
 .proj-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,26px)}
 .proj{position:relative;background:var(--card);border:1.5px solid var(--line);padding:24px 22px 22px;transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .35s}
 .proj:nth-child(3n+1){transform:rotate(-.6deg)}
@@ -144,6 +149,9 @@ section{position:relative;padding:clamp(70px,10vw,140px) clamp(16px,4vw,64px)}
 .proj-wide{grid-column:1/-1;transform:rotate(-.3deg)!important}
 .proj-wide{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(20px,4vw,56px);align-items:center}
 .wide-steps{list-style:none;padding-right:40px}
+.wide-shot{grid-column:1/-1;margin:6px 0 0}
+.wide-shot img{width:100%;height:auto;border-radius:6px;box-shadow:0 14px 30px rgba(0,0,0,.18)}
+.wide-shot figcaption{margin-top:12px;text-align:center;font-family:"Above Serif";font-style:italic;color:var(--ink-2);font-size:16px}
 .wide-steps li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px dashed var(--line)}
 .wide-steps li:first-child{border-top:0}
 .wide-steps b{font-family:"Zing Rust";font-weight:400;font-size:28px;color:var(--red);line-height:1;min-width:22px}
@@ -321,6 +329,11 @@ footer .brand{display:block;font-size:34px;color:var(--ink);margin-bottom:6px}
       </div>
     </div>
 
+    <figure class="shot reveal">
+      <div class="shot-frame"><img src="assets/aeye-app.jpg" alt="AEye desktop app showing live tracking: the front camera reads gaze as Center / Down with head pose angles, next to the side camera panel" loading="lazy"></div>
+      <figcaption>AEye in action: live tracking reads gaze and head pose from the front camera, with the side camera panel for posture.</figcaption>
+    </figure>
+
     <div class="proj-grid">
       <article class="proj proj-wide reveal">
         <span class="num">02</span>
@@ -335,6 +348,10 @@ footer .brand{display:block;font-size:34px;color:var(--ink);margin-bottom:6px}
           <li><b>2</b><span>Cebuano voice cue<small>tells the driver to cut the engine</small></span></li>
           <li><b>3</b><span>Peso savings + fuel prices<small>tracks money saved, shows a price board</small></span></li>
         </ol>
+        <figure class="wide-shot">
+          <img src="assets/stf-app.jpg" alt="STF app screens: HUD with zones on a Cebu map, Presyo fuel price board, trip summary, savings tracker, and Kita weekly income chart" loading="lazy">
+          <figcaption>The five app screens: HUD + zones, Presyo board, Summary, Savings, and Kita.</figcaption>
+        </figure>
       </article>
       <article class="proj reveal">
         <span class="num">03</span>
